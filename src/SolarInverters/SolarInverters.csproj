@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- NuGet Metadata -->
+    <IsPackable>true</IsPackable>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageId>SolarInverters</PackageId>
+    <Description>
+            Add your description
+        </Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>dotnet;$(TargetFramework)</PackageTags>
+    <Configurations>Debug;Release</Configurations>
+    <UserSecretsId>4accc851-86e8-43d5-8d7f-17ff1f932f5a</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Nomirun.Sdk" Version="1.0.132" />
+    <PackageReference Include="Nomirun.Sdk.Abstractions" Version="1.0.30" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.0.0" />
+    <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="4.3.0" />
+    <PackageReference Include="Asp.Versioning.Abstractions" Version="8.1.0" />
+    <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.33.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.73.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Infrastructure\Grpc\*.proto" GrpcServices="Server" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="SolarInverters.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="RunDebugger" Condition="'$(Configuration)'=='Debug'" AfterTargets="Build">
+    <Exec Command="C:\Users\miha\.nomirun\nomirun.exe module debug --module-output $(MSBuildProjectDirectory)\$(OutputPath) --module-name SolarInverters --module-id a6642fd9-fb82-4a84-ad28-0e37d5b8f9c1 --host-framework $(TargetFramework)" StdOutEncoding="UTF-8" StdErrEncoding="UTF-8" ConsoleToMsBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="Result" />
+    </Exec>
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\SolarPlatformCommon\SolarPlatformCommon.csproj" />
+  </ItemGroup>
+</Project>

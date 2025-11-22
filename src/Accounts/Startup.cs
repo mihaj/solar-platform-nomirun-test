@@ -1,6 +1,5 @@
 using Accounts.Extensions;
 using Accounts.Infrastructure.Handlers;
-using Amazon.SecurityToken.Model;
 using Nomirun.Sdk.Abstractions;
 using Nomirun.Sdk.Abstractions.Interfaces;
 using Nomirun.Sdk.Infrastructure.HttpClient;

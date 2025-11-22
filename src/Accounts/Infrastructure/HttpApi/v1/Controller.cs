@@ -1,7 +1,7 @@
+using Accounts.Models;
 using Nomirun.Sdk.Abstractions.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace Accounts.Infrastructure.HttpApi.v1;
 
@@ -18,6 +18,14 @@ public class AccountsController : NomirunApiController
     [HttpGet("accounts/{accountId}")]
     public async Task<IActionResult> GetAccount([FromRoute] long accountId)
     {
-        return Ok();
+        return Ok(new Account
+        {
+            FirstName = "Miha",
+            LastName = "Jakovac",
+            SolarInverterIds = new List<long>()
+            {
+                100
+            }
+        });
     }
 }

@@ -26,7 +26,11 @@ public class ReportsController : NomirunApiController
         var monthlyReport = new MonthlyReport { Title = "Monthly report september 2025" };
 
         var accountDetails =
-            await _mediate.Send<GetAccountDataRequest, AccountDataResponse>(new GetAccountDataRequest { AccountId = 1 });
+            await _mediate.Send<GetAccountDataRequest, AccountDataResponse>(
+                new GetAccountDataRequest
+                {
+                    AccountId = 1
+                });
 
         var solarInverterData =
             await _mediate.Send<GetSolarInverterMonthlyPowerReportRequest, SolarInvereterMonthyDataResponse>(

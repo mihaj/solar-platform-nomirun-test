@@ -1,13 +1,71 @@
-# Solution Documentataion
+# 1. Nomirun Solution description
 
 SolarPlatform is a distributed system designed for the management and monitoring of solar energy infrastructure. The solution is organized into the following projects:
 
-- `src/SolarInverters` This is the core domain module responsible for managing solar inverter hardware. It likely handles device registration, telemetry data ingestion, and configuration of solar inverters.
-- `src/Accounts` This module manages the identity and access control aspect of the platform. It is responsible for user registration, authentication, profile management, and potentially tenant handling for different solar installations.
-- `src/Reports` This project focuses on data analytics and output. It aggregates data (likely from the Inverters module) to generate usage reports, energy production statistics, and performance summaries.
-- `src/SolarPlatformCommon` A shared library referenced by the other projects. It contains common infrastructure, data transfer objects (Requests/Responses), and shared logic to ensure consistency across the platform's services.
+- `src/SolarInverters` This Nomirun module responsible for managing solar inverter hardware.
+- `src/Accounts` This Nomirun module manages the identity and access control aspect of the platform.
+- `src/Reports` This Nomirun module focuses on reports.
+- `src/SolarPlatformCommon` A shared library referenced by the other 3 projects. It contains common infrastructure, data transfer objects (Requests/Responses), and shared logic to ensure consistency across the platform's services.
 
-## 1. Run the platform as microservices architecture
+# 2. Configure Nomirun CLI
+
+First Install Nomirun CLI: https://nomirun.com/docs/getting-started/installation
+
+Next you need to initialize Nomirun CLI: https://nomirun.com/docs/getting-started/init
+
+Make sure you configure at least 1 NuGet repository. We recommend GitHub.
+
+Then go to `<user_profile>\.nomirun` folder and create these 2 files.
+
+## 2.1. modules.yaml
+
+```yaml
+modules:
+- name: SolarInverters
+  csproj: SolarPlatform\src\SolarInverters\SolarInverters.csproj
+  hostPorts:
+    httpPort: 5310
+    httpsPort: 5311
+    grpcPort: 5312
+    grpcsPort: 5313
+    metricsHttpPort: 5314
+    metricsHttpsPort: 5315
+- name: Accounts
+  csproj: SolarPlatform\src\Accounts\Accounts.csproj
+  hostPorts:
+    httpPort: 5320
+    httpsPort: 5321
+    grpcPort: 5322
+    grpcsPort: 5323
+    metricsHttpPort: 5324
+    metricsHttpsPort: 5325
+- name: Reports
+  csproj: SolarPlatform\src\Reports\Reports.csproj
+  hostPorts:
+    httpPort: 5330
+    httpsPort: 5331
+    grpcPort: 5332
+    grpcsPort: 5333
+    metricsHttpPort: 5334
+    metricsHttpsPort: 5335
+
+```
+
+## 2.2. libraries.yaml
+
+```yaml
+libraries:
+- name: SolarPlatformCommon
+  csproj: SolarPlatform\src\SolarPlatformCommon\SolarPlatformCommon.csproj
+```
+
+Now you can open the solution in your IDE / code editor and build the code.
+
+# 3. Run some commands to test it :)
+
+Read out [Getting started guides](https://nomirun.com/docs/getting-started/development-configuration/).
+
+## 3.1. Run the platform as microservices architecture
 
 ```powershell
 nomi cluster new --cluster-name SolarPlatform
@@ -19,7 +77,7 @@ nomi cluster start --cluster-name SolarPlatform
 nomi cluster stop --cluster-name SolarPlatform
 ```
 
-## 2. Run the platform as modular monolith architecture
+## 3.2. Run the platform as modular monolith architecture
 
 ```powershell
 nomi cluster new --cluster-name SolarPlatformMonolith
@@ -29,7 +87,7 @@ nomi cluster start --cluster-name SolarPlatformMonolith
 nomi cluster stop --cluster-name SolarPlatformMonolith
 ```
 
-## 3. Build Modules
+## 3.3. Build Modules
 
 ```powershell
 nomi module build --module-name Accounts --module-version 1.0.0 --nuget-server-name "GitHub"
@@ -38,7 +96,7 @@ nomi module build --module-name SolarInverters --module-version 1.0.0 --nuget-se
 nomi library build -m SolarPlatformCommon -v 1.0.0 --nuget-server-name "GitHub"
 ```
 
-## 4. Run the platform as hybrid architecture
+## 3.4. Run the platform as hybrid architecture
 
 ```powershell
 nomi cluster new --cluster-name SolarPlatformLinux
@@ -58,7 +116,7 @@ nomi cluster configure -c SolarPlatformLinux --nuget-server-name "GitHub" -h Sta
 nomi cluster build --cluster-name SolarPlatformLinux -t Standalone -o c:\nomirun
 ```
 
-## 5. Generate Swagger controller attributes with AI
+## 3.5. Generate Swagger controller attributes with AI
 
 ```powershell
 nomi generate swagger -m Accounts

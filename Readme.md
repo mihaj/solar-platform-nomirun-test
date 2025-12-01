@@ -61,11 +61,15 @@ libraries:
 
 Now you can open the solution in your IDE / code editor and build the code.
 
-# 3. Run some commands to test it :)
+# 3. Pull down this GIT repository
+
+Pull down this git repository to `<user_profile>\.nomirun\repos`. The `repos` folder is created with `nomirun init` and is the standard folder where all new Nomirun modules are created. Since you are pulling down the code from this repository, clone it to that folder.
+
+# 4. Run some commands to test it :)
 
 Read out [Getting started guides](https://nomirun.com/docs/getting-started/development-configuration/).
 
-## 3.1. Run the platform as microservices architecture
+## 4.1. Run the platform as microservices architecture
 
 ```powershell
 nomi cluster new --cluster-name SolarPlatform
@@ -77,7 +81,7 @@ nomi cluster start --cluster-name SolarPlatform
 nomi cluster stop --cluster-name SolarPlatform
 ```
 
-## 3.2. Run the platform as modular monolith architecture
+## 4.2. Run the platform as modular monolith architecture
 
 ```powershell
 nomi cluster new --cluster-name SolarPlatformMonolith
@@ -87,7 +91,7 @@ nomi cluster start --cluster-name SolarPlatformMonolith
 nomi cluster stop --cluster-name SolarPlatformMonolith
 ```
 
-## 3.3. Build Modules
+## 4.3. Build Modules
 
 ```powershell
 nomi module build --module-name Accounts --module-version 1.0.0 --nuget-server-name "GitHub"
@@ -96,7 +100,7 @@ nomi module build --module-name SolarInverters --module-version 1.0.0 --nuget-se
 nomi library build -m SolarPlatformCommon -v 1.0.0 --nuget-server-name "GitHub"
 ```
 
-## 3.4. Run the platform as hybrid architecture
+## 4.4. Run the platform as hybrid architecture
 
 ```powershell
 nomi cluster new --cluster-name SolarPlatformLinux
@@ -116,7 +120,7 @@ nomi cluster configure -c SolarPlatformLinux --nuget-server-name "GitHub" -h Sta
 nomi cluster build --cluster-name SolarPlatformLinux -t Standalone -o c:\nomirun
 ```
 
-## 3.5. Generate Swagger controller attributes with AI
+## 4.5. Generate Swagger controller attributes with AI
 
 ```powershell
 nomi generate swagger -m Accounts

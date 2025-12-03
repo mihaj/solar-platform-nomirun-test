@@ -1,3 +1,7 @@
+### ⚡️ This repository is no longer maintained. New repository is available at https://github.com/Nomirun/solar-platform-example-solution
+
+---------------------------------------
+
 # 1. Nomirun Solution description
 
 SolarPlatform is a distributed system designed for the management and monitoring of solar energy infrastructure. The solution is organized into the following projects:
